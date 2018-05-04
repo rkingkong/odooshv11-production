@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sale.report_invoice_document_inherit_sale" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='invoice_address']" position="attributes">
+            <attribute name="groups">!sale.group_delivery_invoice_address</attribute>
+        </xpath>
+        <xpath expr="//div[@name='invoice_address']" position="before">
+            <div class="col-xs-5 col-xs-offset-1" groups="sale.group_delivery_invoice_address" style="margin-left: 0; padding-top: 20px; width:75%">
+                <strong>Bill to address:</strong>
+                <div t-field="o.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+            </div>
+            <div class="col-xs-4" groups="sale.group_delivery_invoice_address" style="padding-top: 20px;width:25%">
+                <div t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
+                    <strong>Shipping address:</strong>
+                    <div t-field="o.partner_shipping_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
