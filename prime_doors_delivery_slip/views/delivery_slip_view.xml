@@ -38,7 +38,7 @@
                         <thead>
                             <tr>
                                 <th t-if="o.origin"><strong>ORDER (ORIGIN)</strong></th>
-                                <th t-if="o.sale_id.origin"><strong>CUSTOMER P.O</strong></th>
+                                <th><strong>CUSTOMER P.O</strong></th>
                                 <th t-if="o.sale_id"><strong>TERMS</strong></th>
                                 <th name="td_sched_date_h">
                                     <strong>DATE</strong>
@@ -50,8 +50,8 @@
                                 <td t-if="o.origin">
                                     <span t-field="o.origin"/>
                                 </td>
-                                <td t-if="o.sale_id.origin">
-                                    <span t-field="o.sale_id.origin"/>
+                                <td>
+                                    <span t-field="o.sale_id.client_order_ref"/>
                                 </td>
                                 <td t-if="o.sale_id">
                                     <span t-field="o.sale_id.payment_term_id"/>
@@ -160,7 +160,7 @@
                     <div class="text-left" style="padding-top: 40px; padding-bottom: 10px;">
                         <span style="font-size:11px; border-top: 1px solid #000;">RECEIVED ABOVE IN GOOD CONDITION</span>
                     </div>
-                    <div class="panel-footer text-center">
+                    <div class="text-center" style="width: 100%;border: 1pt solid #dad5d5; padding:5px;">
                         <p style="font-size:9px">
                         ALL VISIBLE SHIPMENT DAMAGE MUST BE REPORTED ON THE DELIVERY SLIP AT THE TIME OF DELIVERY, ALL CONCEALED OR SHORTAGE OF PRODUCT MUST BE REPORTED TO PRIME DOORS SALES AND SERVICES, LLC. WITHIN 24 HOURS OF RECEIPT. FAILURE TO DO SO MIGHT RESULT IN NO REPLACEMENT OR CREDIT BEING GIVEN.
                         </p>

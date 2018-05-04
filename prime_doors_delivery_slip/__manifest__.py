@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Prime Doors Delivery Slip',
-    'version': '11.0.1.0.0',
+    'version': '11.0.2.0.1',
     'summary': '',
     'category': 'Inventory',
     'author': 'Cybrosys Techno Solutions',
@@ -14,6 +14,7 @@
         'views/sale_order_line_inherit.xml',
         'views/invoice_line_inherit.xml',
         'views/stock_picking_inherit_view.xml',
+        'views/delivery_slip_cust_ref.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,
