@@ -11,9 +11,12 @@
                             <div>
                                 <span><strong>Customer</strong></span>
                             </div>
-                            <t t-set="invoice_address_id" t-value="o.env['res.partner'].browse(o.partner_id.address_get(['invoice'])['invoice'])"/>
-                            <div t-if="o.partner_id" name="partner_header">
-                                <div t-esc="invoice_address_id"
+                            <div t-if="o.sale_id" name="partner_header">
+                                <div t-esc="o.sale_id.partner_id"
+                                   t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                            </div>
+                            <div t-if="not (o.sale_id)" name="partner_header">
+                                <div t-esc="o.partner_id"
                                    t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
                             </div>
                         </div>
@@ -22,7 +25,7 @@
                                 <span><strong>Ship To</strong></span>
                             </div>
                             <div t-if="o.move_lines and o.move_lines[0].partner_id" name="partner_header">
-                                <div t-field="o.move_lines[0].partner_id"
+                                <div t-esc="o.move_lines[0].partner_id"
                                    t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
                             </div>
                             <div t-if="not (o.move_lines and o.move_lines[0].partner_id) and o.partner_id" name="partner_header">
@@ -157,10 +160,10 @@
                         </t>
                     </p>
                     <br/>
-                    <div class="text-left" style="padding-top: 40px; padding-bottom: 10px;">
+                    <div class="footer text-left" style="padding-top: 40px; padding-bottom: 10px;">
                         <span style="font-size:11px; border-top: 1px solid #000;">RECEIVED ABOVE IN GOOD CONDITION</span>
                     </div>
-                    <div class="text-center" style="width: 100%;border: 1pt solid #dad5d5; padding:5px;">
+                    <div class="footer text-center" style="width: 100%;border: 1pt solid #dad5d5; padding:5px;">
                         <p style="font-size:9px">
                         ALL VISIBLE SHIPMENT DAMAGE MUST BE REPORTED ON THE DELIVERY SLIP AT THE TIME OF DELIVERY, ALL CONCEALED OR SHORTAGE OF PRODUCT MUST BE REPORTED TO PRIME DOORS SALES AND SERVICES, LLC. WITHIN 24 HOURS OF RECEIPT. FAILURE TO DO SO MIGHT RESULT IN NO REPLACEMENT OR CREDIT BEING GIVEN.
                         </p>

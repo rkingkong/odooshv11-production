@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Prime Doors Delivery Slip',
-    'version': '11.0.2.0.1',
+    'version': '11.0.3.0.1',
     'summary': '',
     'category': 'Inventory',
     'author': 'Cybrosys Techno Solutions',
