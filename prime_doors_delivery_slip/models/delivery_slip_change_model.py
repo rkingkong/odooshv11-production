@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 class InheritSaleOrderLineInstruction(models.Model):
     _inherit = 'sale.order.line'
 
-    instruction = fields.Char("Instruction")
+    instruction = fields.Text("Instruction")
 
     @api.multi
     def _prepare_invoice_line(self, qty):
@@ -53,13 +53,13 @@ class InheritStockPickingInstruction(models.Model):
 class InheritAccountInvoiceLineInstruction(models.Model):
     _inherit = 'account.invoice.line'
 
-    instruction = fields.Char("Instruction")
+    instruction = fields.Text("Instruction")
 
 
 class InheritStockMove(models.Model):
     _inherit = 'stock.move'
 
-    instruction = fields.Char("Instruction")
+    instruction = fields.Text("Instruction")
 
     @api.model
     def create(self, vals):
