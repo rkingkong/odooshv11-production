@@ -2,7 +2,7 @@
 {
     'name': 'Prime Doors Delivery Slip',
     'version': '11.0.3.0.1',
-    'summary': '',
+    'summary': 'This module contain Delivery slip update, Sale price markup and Instruction field on sale and invoice',
     'category': 'Inventory',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
@@ -15,6 +15,7 @@
         'views/invoice_line_inherit.xml',
         'views/stock_picking_inherit_view.xml',
         'views/delivery_slip_cust_ref.xml',
+        'views/sale_price_markup.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,

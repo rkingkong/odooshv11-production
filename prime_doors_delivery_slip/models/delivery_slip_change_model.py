@@ -37,7 +37,10 @@ class InheritSaleOrderLineInstruction(models.Model):
             'invoice_line_tax_ids': [(6, 0, self.tax_id.ids)],
             'account_analytic_id': self.order_id.analytic_account_id.id,
             'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
+
         }
+        if self.read([])[0].get('markup'):
+            res['markup'] = self.markup
         return res
 
 
