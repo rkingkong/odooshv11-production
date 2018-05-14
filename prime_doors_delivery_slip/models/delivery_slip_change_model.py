@@ -66,10 +66,7 @@ class InheritStockMove(models.Model):
 
     @api.model
     def create(self, vals):
-        origin = vals.get('origin')
-        order = self.env['sale.order'].search([('name', '=', origin)])
-        order_line = self.env['sale.order.line'].search([('order_id', '=', order.id),
-                                                         ('product_id', '=', vals.get('product_id'))])
+        order_line = self.env['sale.order.line'].browse(vals.get('sale_line_id'))
         instruction = order_line.instruction
         vals['instruction'] = instruction
         perform_tracking = not self.env.context.get('mail_notrack') and vals.get('picking_id')
