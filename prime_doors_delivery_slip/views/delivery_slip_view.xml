@@ -5,11 +5,11 @@
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
                 <div class="page">
-                    <h1 class="text-center">Delivery Slip</h1>
+                    <h1 class="text-center">DELIVERY SLIP</h1>
                     <div class="row" name="customer_address">
                         <div class="col-xs-4 pull-left">
                             <div>
-                                <span><strong>Customer</strong></span>
+                                <span><strong>CUSTOMER</strong></span>
                             </div>
                             <div t-if="o.sale_id" name="partner_header">
                                 <div t-esc="o.sale_id.partner_id"
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-xs-4 pull-right">
                             <div>
-                                <span><strong>Ship To</strong></span>
+                                <span><strong>SHIP TO</strong></span>
                             </div>
                             <div t-if="o.move_lines and o.move_lines[0].partner_id" name="partner_header">
                                 <div t-esc="o.move_lines[0].partner_id"
@@ -73,10 +73,10 @@
                     <table class="table table-condensed mt48" t-if="not o.move_line_ids">
                         <thead>
                             <tr>
-                                <th><strong>Line #</strong></th>
-                                <th><strong>Quantity</strong></th>
-                                <th><strong>Product</strong></th>
-                                <th class="text-center">Description/Instruction</th>
+                                <th><strong>LINE #</strong></th>
+                                <th><strong>QUANTITY</strong></th>
+                                <th><strong>PRODUCT</strong></th>
+                                <th class="text-center">DESCRIPTION/INSTRUCTION</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,13 +99,13 @@
                         <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')" groups="stock.group_production_lot"/>
                         <thead>
                             <tr>
-                                <th><strong>Line #</strong></th>
-                                <th class="text-center"><strong>Quantity</strong></th>
-                                <th><strong>Product</strong></th>
+                                <th><strong>LINE #</strong></th>
+                                <th class="text-center"><strong>QUANTITY</strong></th>
+                                <th><strong>PRODUCT</strong></th>
                                 <th name="lot_serial" t-if="has_serial_number">
-                                    Lot/Serial Number
+                                    LOT/SERIAL NUMBER
                                 </th>
-                                <th class="text-center">Description/Instruction</th>
+                                <th class="text-center">DESCRIPTION/INSTRUCTION</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,16 +152,16 @@
                         </tbody>
                     </table>
                     <p t-if="o.backorder_id">
-                        This shipment is a backorder of <t t-esc="o.backorder_id.name"/>.
+                        THIS SHIPMENT IS A BACKORDER OF <t t-esc="o.backorder_id.name"/>.
                     </p>
                     <p>
                         <t t-if="o.search([('backorder_id', '=', o.id), ('state', 'not in', ['cancel', 'done'])])">
-                            All items couldn't be shipped, the remaining ones will be shipped as soon as they become available.
+                            ALL ITEMS COULDN'T BE SHIPPED, THE REMAINING ONES WILL BE SHIPPED AS SOON AS THEY BECOME AVAILABLE.
                         </t>
                     </p>
                     <br/>
                     <div class="footer text-left" style="padding-top: 40px; padding-bottom: 10px;">
-                        <span style="font-size:11px; border-top: 1px solid #000;">RECEIVED ABOVE IN GOOD CONDITION</span>
+                        <span style="font-size:11px; border-top: 1px solid #000;">RECEIVED ABOVE IN GOOD CONDITION</span><br/>
                         <div class="text-center" style="width: 100%;border: 1pt solid #dad5d5; padding:5px;">
                             <p style="font-size:9px">
                             ALL VISIBLE SHIPMENT DAMAGE MUST BE REPORTED ON THE DELIVERY SLIP AT THE TIME OF DELIVERY, ALL CONCEALED OR SHORTAGE OF PRODUCT MUST BE REPORTED TO PRIME DOORS SALES AND SERVICES, LLC. WITHIN 24 HOURS OF RECEIPT. FAILURE TO DO SO MIGHT RESULT IN NO REPLACEMENT OR CREDIT BEING GIVEN.

@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="stock_picking_inherit" inherit_id="stock.report_picking">
-        <xpath expr="//div[@class='page']" position="replace">
+        <xpath expr="//div[hasclass('page')]" position="replace">
             <div class="page">
-                <h2 style="padding-bottom: 30px;" class="text-center">Picking Operation</h2>
+                <h2 style="padding-bottom: 30px;" class="text-center">PICKING OPERATION</h2>
                 <div class="row">
                     <div class="col-xs-6">
-                        <!--<div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id">
-                            <span><strong>Delivery Address:</strong></span>
-                            <div t-field="o.move_lines[0].partner_id"
-                                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                        </div>-->
-                       <!-- <div t-if="o.picking_type_id.code != 'internal' and (not o.move_lines or not o.move_lines[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
-                            <span><strong>Warehouse Address:</strong></span>
-                            <div t-field="o.picking_type_id.warehouse_id.partner_id"
-                                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
-                        </div>-->
-                        <div t-if="o.partner_id" name="partner_header">
+                        <div t-if="o.sale_id" name="partner_header">
                             <strong>
-                            <div t-field="o.partner_id"
-                               t-options='{"widget": "contact", "fields": ["name"], "no_marker": True, "phone_icons": True}'/>
+                                <div t-field="o.sale_id.partner_id"
+                               t-options='{"widget": "contact", "fields": ["name"], "no_marker": True,}'/>
                             </strong>
+                            <div t-field="o.sale_id.partner_invoice_id"
+                               t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'/>
                         </div>
                     </div>
                     <div class="col-xs-5 col-xs-offset-1">
                         <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
-                            <span><strong>Partner Address:</strong></span>
+                            <span><strong>PARTNER ADDRESS:</strong></span>
                         </div>
                         <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
-                            <span><strong>Warehouse Address:</strong></span>
+                            <span><strong>WAREHOUSE ADDRESS:</strong></span>
                         </div>
                         <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
-                            <span><strong>Customer Address:</strong></span>
+                            <span><strong>CUSTOMER ADDRESS:</strong></span>
                         </div>
                         <div t-if="o.partner_id" name="partner_header">
                             <div t-field="o.partner_id"
@@ -147,7 +139,7 @@
                                     </table>
                                 </t>
                                 <t t-else="">
-                                    <span>No reservation or quantity done yet.</span>
+                                    <span>NO RESERVATION OR QUANTITY DONE YET.</span>
                                 </t>
                             </td>
                         </tr>
@@ -173,8 +165,8 @@
                     </tbody>
                 </table>
                 <p t-if="o.state in ['draft', 'waiting', 'confirmed']">
-                    You do not have any products reserved for this picking.  Please click the 'Reserve' button
-                    to check if products are available.
+                    YOU DO NOT HAVE ANY PRODUCTS RESERVED FOR THIS PICKING.  PLEASE CLICK THE 'RESERVE' BUTTON
+                    TO CHECK IF PRODUCTS ARE AVAILABLE.
                 </p>
                 <p t-field="o.note"/>
             </div>
