@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--Email template -->
+        <record id="email_template_vendor_due_alert" model="mail.template">
+            <field name="name">Due Alert</field>
+            <field name="email_from">${(object.create_uid.email and '%s &lt;%s&gt;' % (object.create_uid.name, object.create_uid.email) or '')|safe}</field>
+            <field name="subject">Due date reminder for ${object.partner_id.name} (${object.number})</field>
+            <field name="partner_to">${object.user_id.id}</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_name">Due Alert_${(object.number or '').replace('/','_')}</field>
+            <field name="lang">${object.user_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>Dear
+% if object.user_id:
+    ${object.user_id.name}
+% endif
+,</p>
+<p>
+Due date of <strong>${object.number}</strong>
+ % if object.origin:
+against purchase order <strong>${object.origin}</strong>
+% endif
+to <strong>${object.partner_id.name}</strong> expire within 3 days.
+Total due amount is <strong>${format_amount(object.residual, object.currency_id)}</strong>
+</p>
+]]></field>
+        </record>
+    </data>
+</odoo>
