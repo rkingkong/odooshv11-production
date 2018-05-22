@@ -5,11 +5,26 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="before">
+                <!-- in tree view-->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='purchase_price']" position="after">
                     <field name="markup"/>
                 </xpath>
-                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='markup']" position="after">
+                    <field name="price_unit"/>
+                </xpath>
+
+                <!-- in form view-->
+                <xpath expr="//field[@name='order_line']/form//field[@name='purchase_price']" position="after">
                     <field name="markup"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='markup']" position="after">
+                    <field name="price_unit"/>
                 </xpath>
             </field>
      </record>
