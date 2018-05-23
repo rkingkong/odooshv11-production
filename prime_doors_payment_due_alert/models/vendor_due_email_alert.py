@@ -19,6 +19,6 @@ class VendorDueEmailAlert(models.Model):
                 diff = due_date - date_today
                 if diff.days is 3:
                     ir_model_data = self.env['ir.model.data']
-                    template_id = ir_model_data.get_object_reference('prime_doors_amount_due_alert', 'email_template_vendor_due_alert')[1]
+                    template_id = ir_model_data.get_object_reference('prime_doors_payment_due_alert', 'email_template_vendor_due_alert')[1]
                     mail_template = self.env['mail.template'].browse(template_id)
                     mail_template.send_mail(invoice.id, force_send=True)
