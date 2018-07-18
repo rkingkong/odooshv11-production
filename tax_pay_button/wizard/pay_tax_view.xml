@@ -10,7 +10,7 @@
                         <tree create="0" delete="0" editable="bottom">
                             <field name="account_id" required="1" string="Account" options="{'no_create_edit': True, 'no_open':True,'no_create':True}"/>
                             <field name="amount" required="1"/>
-                            <field name="type" readonly="1"/>
+                            <field name="type"/>
                         </tree>
                     </field>
 

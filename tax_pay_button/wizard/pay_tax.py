@@ -16,6 +16,7 @@
 
 from odoo import models, api, fields, _
 import json
+import locale
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -48,6 +49,12 @@ class TaxPay(models.TransientModel):
             return value
         currency_id = currency or self.env.user.company_id.currency_id
         value = value.replace(currency_id.symbol,'').strip()
+        _logger.info('=========%r====%r',self._context.get('lang'),self.env.user.lang)
+        timezone = self._context.get('lang') or self.env.user.lang
+        if timezone == 'en_US':
+            timezone += '.UTF-8'
+        locale.setlocale(locale.LC_ALL, timezone)
+        _logger.info('================%r',locale.atof(value))
         return value
 
     @api.model
@@ -85,5 +92,5 @@ class TaxPay(models.TransientModel):
 
     account_id = fields.Many2one('account.account', string="Account")
     amount = fields.Float(string="Amount", required=True)
-    type = fields.Selection([('cr','Cr'),('dr','Dr')], string="Amount Type", default="cr")
+    type = fields.Selection([('cr','Cr'),('dr','Dr')], string="Amount Type")
     tax_id = fields.Many2one('tax.pay.wizard', string="Tax Pay")
