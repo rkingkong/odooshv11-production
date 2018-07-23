@@ -16,7 +16,9 @@
 
 from odoo import models, api, fields, _
 import json
-import locale
+from re import sub
+from decimal import Decimal
+
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -45,17 +47,18 @@ class TaxPay(models.TransientModel):
     _name = 'tax.pay.wizard'
 
     def format_amount(self, value, currency=False):
-        if self.env.context.get('no_format'):
-            return value
-        currency_id = currency or self.env.user.company_id.currency_id
-        value = value.replace(currency_id.symbol,'').strip()
-        _logger.info('=========%r====%r',self._context.get('lang'),self.env.user.lang)
-        timezone = self._context.get('lang') or self.env.user.lang
-        if timezone == 'en_US':
-            timezone += '.UTF-8'
-        locale.setlocale(locale.LC_ALL, timezone)
-        _logger.info('================%r',locale.atof(value))
-        return value
+        value = Decimal(sub(r'[^\d.]', '', value))
+        # if self.env.context.get('no_format'):
+        #     return value
+        # currency_id = currency or self.env.user.company_id.currency_id
+        # value = value.replace(currency_id.symbol,'').strip()
+        # _logger.info('=========%r====%r',self._context.get('lang'),self.env.user.lang)
+        # timezone = self._context.get('lang') or self.env.user.lang
+        # if timezone == 'en_US':
+        #     timezone += '.UTF-8'
+        # locale.setlocale(locale.LC_ALL, timezone)
+        # _logger.info('================%r',locale.atof(value))
+        # return value
 
     @api.model
     def get_default_pay_journals(self):
