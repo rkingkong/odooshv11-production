@@ -58,7 +58,7 @@ class TaxPay(models.TransientModel):
         #     timezone += '.UTF-8'
         # locale.setlocale(locale.LC_ALL, timezone)
         # _logger.info('================%r',locale.atof(value))
-        # return value
+        return value
 
     @api.model
     def get_default_pay_journals(self):
