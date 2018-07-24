@@ -7,11 +7,12 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
-    'depends': ['base', 'account_invoicing', 'prime_doors_external_layout'],
+    'depends': ['prime_doors_external_layout'],
     'website': 'https://www.cybrosys.com',
     'data': [
         'views/invoice_slip_view.xml',
-        'views/inherit_sale_invoice_inherit_address.xml'
+        'views/inherit_sale_invoice_inherit_address.xml',
+        'report/account_report_payment_receipt_template.xml'
     ],
     'license': 'AGPL-3',
     'installable': True,
