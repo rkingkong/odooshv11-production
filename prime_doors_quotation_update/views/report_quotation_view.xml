@@ -140,10 +140,15 @@
                     <div class="row" name="total">
                         <div class="col-xs-7 " style="margin-left: 14px; width: 65%; border: 1pt solid #dad5d5; padding: 5px; font-size: 11px;">
                             <p style="text-align:justify!important;">
-                                NOTE: THIS ESTIMATE IS NOT A CONTRACT OR A BILL, IT IS OUR BEST GUESS AT THE TOTAL PRICE TO COMPLETE THE WORK STATED ABOVE, BASED UPON INITIAL INSPECTION / INFORMATION.
-                                IF PRICES CHANGE OR ADDITIONAL ITEMS OR LABOR ARE REQUIRED; WE WILL INFORM YOU PRIOR TO PROCEEDING WITH THE PROJECT.
-                                PLEASE REFERENCE THIS QUOTE NUMBER IF YOU DECIDE TO USE OUR SERVICES.
-                                THANK YOU FOR THE OPPORTUNITY TO QUOTE THIS PROJECT.
+                                <t t-if="doc.state in ['draft','sent']">
+                                    NOTE: THIS IS THE DETAILED ACKNOWLEDGEMENT OF YOUR ORDER. ANY ERRORS OR OMISSIONS MUST BE COMMUNICATED WITHIN TWO (2) BUSINESS DAYS UPON RECEIPT OF THE ACKNOWLEDGEMENT TO MAINTAIN THE ORIGINAL SCHEDULED SHIPPING DATE. ANY CORRECTIONS SHOULD BE ADVISED TO PRIME DOORS SALES &amp; SERVICES. THIS ACKNOWLEDGEMENT IS GIVEN IN ACCORDANCE WITH THE TERMS AND CONDITIONS LISTED IN OUR QUOTATION DOCUMENT.
+                                </t>
+                                <t t-if="doc.state not in ['draft','sent']">
+                                    NOTE: THIS ESTIMATE IS NOT A CONTRACT OR A BILL, IT IS OUR BEST GUESS AT THE TOTAL PRICE TO COMPLETE THE WORK STATED ABOVE, BASED UPON INITIAL INSPECTION / INFORMATION.
+                                    IF PRICES CHANGE OR ADDITIONAL ITEMS OR LABOR ARE REQUIRED; WE WILL INFORM YOU PRIOR TO PROCEEDING WITH THE PROJECT.
+                                    PLEASE REFERENCE THIS QUOTE NUMBER IF YOU DECIDE TO USE OUR SERVICES.
+                                    THANK YOU FOR THE OPPORTUNITY TO QUOTE THIS PROJECT.
+                                </t>
                             </p>
                         </div>
 
