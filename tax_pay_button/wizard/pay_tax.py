@@ -48,16 +48,6 @@ class TaxPay(models.TransientModel):
 
     def format_amount(self, value, currency=False):
         value = Decimal(sub(r'[^\d.]', '', value))
-        # if self.env.context.get('no_format'):
-        #     return value
-        # currency_id = currency or self.env.user.company_id.currency_id
-        # value = value.replace(currency_id.symbol,'').strip()
-        # _logger.info('=========%r====%r',self._context.get('lang'),self.env.user.lang)
-        # timezone = self._context.get('lang') or self.env.user.lang
-        # if timezone == 'en_US':
-        #     timezone += '.UTF-8'
-        # locale.setlocale(locale.LC_ALL, timezone)
-        # _logger.info('================%r',locale.atof(value))
         return value
 
     @api.model
@@ -75,6 +65,13 @@ class TaxPay(models.TransientModel):
                     amount += float(self.format_amount(line.get('columns')[1].get('name')))
         return [(0,0,{'account_id':cr_account.id, 'type':'cr','amount':amount}),(0,0,{'account_id':dr_account.id, 'type':'dr','amount':amount})]
 
+    @api.model
+    def get_default_journal_id(self):
+        journal_id = self.env['account.journal'].search([('type','=','general')], limit=1)
+        return journal_id.id if journal_id else False
+        
+
+    journal_id = fields.Many2one('account.journal',string="Journal", default=get_default_journal_id)
     tax_journal_ids = fields.One2many('tax.pay.journal', 'tax_id', string="Tax Payable Journal", default=get_default_pay_journals)
     
     @api.multi
@@ -83,7 +80,7 @@ class TaxPay(models.TransientModel):
         line_ids = []
         for journal in self.tax_journal_ids:
             line_ids.append((0,0,{'account_id':journal.account_id.id, 'credit':journal.amount if journal.type == 'cr' else 0.0,'debit':journal.amount if journal.type == 'dr' else 0.0}))
-        vals = {'ref':'Tax Pay','journal_id':self.env['account.journal'].search([('type','=','general')], limit=1).id or False,'line_ids':line_ids}
+        vals = {'ref':'Tax Pay','journal_id':self.journal_id.id,'line_ids':line_ids}
         res = account_move.create(vals)
         res.post()
         return True
