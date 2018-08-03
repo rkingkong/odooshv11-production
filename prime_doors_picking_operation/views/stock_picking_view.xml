@@ -77,9 +77,6 @@
                         <th width="20%" class="text-center">
                             <t t-if="has_barcode">Barcode</t>
                         </th>
-                        <th width="10%">
-                            <t t-if="o.picking_type_id.code != 'incoming'" align="left">Source</t>
-                        </th>
                         <th width="20%">
                             <t t-if="has_serial_number">Lot/Serial Number</t>
                         </th>
