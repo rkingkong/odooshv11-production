@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <template id="external_layout_boxed_inherit" inherit_id="prime_doors_external_layout.external_layout_boxed_inherit">
+        <xpath expr="//div[hasclass('header', 'o_boxed_header')]" position="inside">
+            <t t-if="doc_model == 'sale.order'">
+                <h3>
+                    <!-- <t t-esc="env.context"/> -->
+                    <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                        <span t-if="doc.state not in ['draft','sent']">ORDER # </span>
+                        <span t-if="doc.state in ['draft','sent']">QUOTATION # </span>
+                    </t>
+                    <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                        <span>PRO-FORMA INVOICE # </span>
+                    </t>
+                    <span t-field="doc.name"/>
+                </h3>
+            </t>
+        </xpath>
+    </template>
     <template id="sale.report_saleorder_document">
         <t t-call="web.external_layout">
             <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
@@ -28,16 +45,6 @@
                     </div>
                 </div>
 
-                <h2>
-                    <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                        <span t-if="doc.state not in ['draft','sent']">ORDER # </span>
-                        <span t-if="doc.state in ['draft','sent']">QUOTATION # </span>
-                    </t>
-                    <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                        <span>PRO-FORMA INVOICE # </span>
-                    </t>
-                    <span t-field="doc.name"/>
-                </h2>
 
                 <div class="row mt32 mb32" id="informations">
                     <div t-if="doc.client_order_ref" class="col-xs-3">
@@ -202,6 +209,22 @@
                     <span t-field="doc.fiscal_position_id.note"/>
                 </p>
                 <div class="oe_structure"/>
+                <div>
+                    <h3 align="center">PRIME – DOORS SALES &amp; SERVICES L.L.C.</h3>
+                    <h3>TERMS AND CONDITIONS</h3>
+                    <p>The following terms and conditions are incorporated in and made a part of every quote, proposal, invoice, delivery slip, or purchase order submitted to and acknowledged by Prime-Doors Sales &amp; Services L.L.C. (“Prime Doors”). Customer’s submission of a purchase order to Prime Doors, or Customer’s acceptance of any goods from Prime Doors, shall constitute Customer’s acceptance of Prime Doors’ Terms and Conditions. Furthermore, the acceptance by Customer of any quotes or proposals received from Prime Doors is expressly limited to the terms of such quotes or proposals, and any terms or conditions proposed in Customer’s purchase orders or any other documents that are inconsistent with or in addition to Prime Doors’ Terms and Conditions are objected to and rejected by Prime Doors’. Any and all of Prime Doors Terms and Conditions are subject to change by Prime Doors without further notice to Customer. Any purchase order submitted by Customer to Prime Doors shall be subject to any and all Terms and Conditions in effect on the date on which such purchase order is submitted to Prime Doors. No purchase order shall be binding upon, or deemed accepted by, Prime Doors unless and until Prime Doors has delivered written confirmation of such acceptance to Customer. Prime Doors’ Terms and Conditions are available upon request.</p>
+                    <p><strong>PAYMENT TERMS:</strong> Payment in full of all invoiced amounts, including freight and taxes, if any, for any goods ordered by Customer from Prime Doors is due upon delivery of the goods, unless different payment terms are specified in writing in a proposal or quote delivered by Prime Doors to Customer. Customer agrees to pay Prime Doors interest at the rate of 18% per annum on all past-due amounts. Any amounts previously quoted by Prime Doors are subject to adjustment to reflect amounts in effect at the time of order, manufacture, shipment, or delivery, including any increase in material costs, freight costs, or taxes.</p>
+                    <p><strong>TAXES:</strong> The amount of any sales, use, revenue, excise, or other taxes applicable to the sale of any goods by Prime Doors to Customer shall be added to the purchase price and shall be paid by Customer.</p>
+                    <p><strong>UNANTICIPATED CIRCUMSTANCES:</strong> Delivery dates are estimated and may be subject to change or delay. Prime Doors shall make reasonable efforts to keep its delivery commitments; however, unanticipated circumstances may delay delivery of the goods, and Prime Doors shall have no liability for such delays. In the event of such delays, the delivery date shall be extended for such additional time as may be necessary under the circumstances, as determined in Prime Doors’ sole discretion. In addition, if Prime Doors’ material or freight costs increase as a result of any unanticipated circumstances, the amount to be paid by Customer under any existing quotes or purchase orders shall be adjusted upward by the amount of such increased costs, and Customer shall pay such increased amount in accordance with Prime Doors’ Terms and Conditions</p>
+                    <p><strong>INSPECTION:</strong> Customer shall inspect all goods immediately upon delivery, and shall within three (3) days of their delivery give written notice to Prime Doors of any claim relating to such goods, including shortage claims, defect claims, or claims that the goods are non-conforming. If Customer shall fail to timely give such notice, the goods shall be deemed to conform with the terms of Customer’s purchase order and Customer shall be bound to accept and pay for the goods in accordance with Prime Doors’ Terms and Conditions. Customer expressly waives any right the Customer may have to revoke acceptance after such three (3) day period. No goods shall be returned to Prime Doors without Prime Doors’ prior written consent.</p>
+                    <p><strong>LIMITATION OF LIABILITY:</strong> Should any goods sold or supplied to Customer by Prime Doors not conform to Customer’s purchase order, Prime Doors’ only liability will be to repair or replace the non-conforming goods, or to refund the purchase price for such goods, as Prime Doors elects in its sole discretion, if (a) Customer properly notifies Prime Doors in writing, within the three (3) day period stated above; (b) Prime Doors’ inspector determines that such goods do not conform to the specifications or descriptions in Customer’s purchase order; (c) within three (3) days of Prime Doors’ written request, Customer returns the goods to Prime Doors; and (d) Customer has timely remitted payment to Prime Doors of all invoiced amounts associated with such goods. IN NO EVENT SHALL PRIME DOORS BE LIABLE FOR ANY PENALTIES, OR FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO, DAMAGES ARISING FROM ANY DELAY IN FURNISHING THE GOODS, THE USE OR SALE OF SUCH GOODS BY CUSTOMER OR ANY THIRD PARTY, OR ANY RECALL OF SUCH GOODS BY CUSTOMER OR ANY THIRD PARTY</p>
+                    <p><strong>DISCLAIMER OF WARRANTY:</strong> EXCEPT AS EXPRESSLY STATED IN WRITING IN A PROPOSAL OR QUOTE DELIVERED BY PRIME DOORS TO CUSTOMER, NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, ARE MADE OR PROVIDED, AND ANY AND ALL SUCH WARRANTIES ARE HEREBY EXPRESSLY DISCLAIMED</p>
+                    <p><strong>RISK OF LOSS:</strong> Risk of loss on all goods ordered from Prime Doors shall pass to Customer upon delivery of the goods to the destination specified in Prime Door’s quote or proposal; provided, however, if the goods are shipped by common carrier, risk of loss shall pass to Customer when the goods leave Prime Doors’ facility.</p>
+                    <p><strong>SUSPENSION OF PERFORMANCE:</strong> If, in Prime Doors’ sole discretion, doubt exists as to Customer’s financial condition or responsibility, or if Customer is past due in the payment of any amount due and owing to Prime Doors , Prime Doors reserves the right, without liability and without prejudice to any other remedies, to suspend performance and to decline shipment, hold further shipments, retain possession, and stop transit, of any goods ordered by or belonging to Customer until Prime Doors receives payment of all amounts due and owing</p>
+                    <p><strong>REMEDIES UPON DEFAULT:</strong> If Customer fails to pay any invoiced amounts as they become due, in addition to all other remedies available to Prime Doors, Prime Doors may immediately accelerate, demand, and recover from Customer all amounts due Prime Doors, whether past-due or not, including all invoiced amounts, and all special, incidental, and consequential damages, costs of collection, interest, attorneys’ fees, and any and all other amounts due to Prime Doors under Prime Doors’ Terms and Conditions.</p>
+                    <p><strong>GOVERNING LAW; EXCLUSIVE VENUE:</strong> Prime Doors’ Terms and Conditions shall be governed by, and construed in accordance with, the laws of the State of Indiana, without regard to its conflicts or choice of laws principles. The exclusive venue for any dispute or litigation relating to Prime Doors’ Terms and Conditions, or arising from any transaction or business dealings between Prime Doors and Customer, shall be the state courts located in the County of Elkhart, State of Indiana, or if a federal matter, the United States District Court for the Northern District of Indiana.</p>
+                    <p><strong>MISCELLANEOUS:</strong> No duties or obligations of Customer under any purchase order may be assigned or delegated without Prime Doors’ prior written consent. If any of Prime Doors’ Terms and Conditions are held by a court to be invalid, void, or unenforceable, the remainder of the provisions of Prime Doors’ Terms and Conditions shall remain in full force and effect and shall in no way be affected, impaired, or invalidated thereby, and Prime Doors’ Terms and Conditions shall be construed as if such invalid, void, or unenforceable provisions were omitted. Prime Doors’ Terms and Conditions set forth the entire agreement between Prime Doors and Customer. No other terms, conditions, or understandings, whether oral or written, shall be binding upon Prime Doors, unless hereafter made in writing and signed by an authorized representative of Prime Doors. No waiver of any provision of Prime Doors’ Terms and Conditions shall be valid unless in writing and signed by Prime Doors, and no course of dealing between Customer and Prime Doors shall have the effect of modifying or altering Prime Doors’ Terms and Conditions. Prime Doors’ Terms and Conditions shall be binding upon Customer and its officers, managers, members, agents, employees, representatives, successors, and assigns, and shall inure to the benefit of the Prime Doors and its managers, members, employees, agents, affiliates, contractors, representatives, successors, and assigns.</p>
+                </div>
             </div>
         </t>
     </template>
