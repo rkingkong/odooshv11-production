@@ -14,7 +14,7 @@
         'views/sale_order_line_inherit.xml',
         'views/invoice_line_inherit.xml',
         'views/stock_picking_inherit_view.xml',
-        'views/delivery_slip_cust_ref.xml',
+        # 'views/delivery_slip_cust_ref.xml',
         'views/sale_price_markup.xml',
     ],
     'license': 'AGPL-3',
