@@ -8,7 +8,7 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
-                    <div class="header not-last-page">
+                    <div class="not-last-page">
 
                         <h1 class="text-center not-last-page">DELIVERY SLIP</h1>
                         <div class="row not-last-page" name="customer_address">
